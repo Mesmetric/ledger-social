@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger Social</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         font-family: system-ui, sans-serif; background: #fff; color: #000; text-align: center; padding: 24px; box-sizing: border-box; }
+  @media (prefers-color-scheme: dark) { body { background: #000; color: #fff; } }
+  a.btn { display: inline-block; margin-top: 20px; padding: 16px 28px; border-radius: 28px; background: #2E7D32;
+          color: #fff; text-decoration: none; font-weight: 600; font-size: 18px; }
+  p { max-width: 420px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ledger Social</h1>
+  <p id="msg">Returning you to the app…</p>
+  <a class="btn" id="go" href="#">Open Ledger Social</a>
+</main>
+<script>
+  // Instagram sends you here after you tap Allow; this page hands the one-time code to the app.
+  var q = window.location.search || "";
+  var target = "intent://auth" + q + "#Intent;scheme=ledgersocial;package=com.ledgerexplained.social;end";
+  document.getElementById("go").href = target;
+  if (q.indexOf("code=") === -1 && q.indexOf("error") === -1) {
+    document.getElementById("msg").textContent = "This page finishes the Instagram login for the Ledger Social app.";
+  } else {
+    window.location.replace(target);
+  }
+</script>
+</body>
+</html>
